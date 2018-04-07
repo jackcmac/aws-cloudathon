@@ -59,14 +59,19 @@ export default class App extends React.Component {
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
             <TouchableOpacity style={{ flex: 1 }}>
-              <Button
+              <Button 
+                title=""
+                onPress={this._pickImage}>
+              </Button>
+              <Button 
                 title="Upload File"
                 onPress={this._pickImage}>
               </Button>
+
             </TouchableOpacity>
 
           </View>
-          <Camera style={{ flex: 9 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+          <Camera style={{ flex: 10 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <TouchableOpacity onPress={this.snap} style={{ flex: 1 }}>
               <Text 
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
