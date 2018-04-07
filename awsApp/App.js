@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { ImagePicker } from 'expo';
+import SoundPlayer from 'react-native-sound-player';
 
 export default class App extends React.Component {
   state = {
@@ -17,6 +18,11 @@ export default class App extends React.Component {
         />
         {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
+        <Button
+          title="Play the mp3 file"
+          onPress={this._playSound}
+        />
       </View>
     );
   }
@@ -31,6 +37,14 @@ export default class App extends React.Component {
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+    }
+  };
+
+  _playSound = async () => {
+    try {
+      SoundPlayer.playSoundFile('johncena', 'mp3');
+    } catch (e) {
+      console.log(`cannot play the sound file`, e);
     }
   };
 
