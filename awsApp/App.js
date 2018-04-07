@@ -52,8 +52,17 @@ export default class App extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }} onPress={this.snap}>
-          <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity style={{ flex: 1 }}>
+              <Button
+                title="Upload File"
+                onPress={this._pickImage}>
+              </Button>
+            </TouchableOpacity>
+
+          </View>
+          <Camera style={{ flex: 9 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <TouchableOpacity onPress={this.snap} style={{ flex: 1 }}>
             </TouchableOpacity>
           </Camera>
@@ -101,9 +110,9 @@ export default class App extends React.Component {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
         console.log(response.body);
-        this.setTimeout(() => {
-          this._playSound;
-        }, 1000);
+        setTimeout(() => {
+          this._playSound();
+        }, 5000);
         /**
          * {
          *   postResponse: {
@@ -126,7 +135,7 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.pngTranslated.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
