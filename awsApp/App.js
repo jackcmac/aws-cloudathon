@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { Audio, ImagePicker, Constants } from 'expo';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { Audio, ImagePicker, Constants, Camera, Permissions } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
 
@@ -34,7 +34,7 @@ export default class App extends React.Component {
         <Button
           title="Click to play sound"
           onPress={this._playSound}
-          />
+        />
 
       </View>
     );
@@ -73,7 +73,7 @@ export default class App extends React.Component {
     }
     console.log("dink");
 
-    
+
   };
 
   _playSound = async () => {
