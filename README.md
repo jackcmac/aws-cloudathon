@@ -1,2 +1,1 @@
-# aws-cloudathon
-2018 AWS Cloudathon Project
+# AWS Cloud a thon project
