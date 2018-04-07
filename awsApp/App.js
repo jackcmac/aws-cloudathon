@@ -69,7 +69,7 @@ export default class App extends React.Component {
       console.log(photo);
       let data = {
         uri: photo.uri,
-        name: "image" + 2 + ".png",
+        name: "image" + this.state.id + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
