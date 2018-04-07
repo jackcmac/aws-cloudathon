@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { ImagePicker } from 'expo';
-import SoundPlayer from 'react-native-sound-player';
+import { Audio, ImagePicker } from 'expo';
+//import Sound from 'react-native-sound';
 
 export default class App extends React.Component {
   state = {
@@ -41,10 +41,31 @@ export default class App extends React.Component {
   };
 
   _playSound = async () => {
+    /*
+    Sound.setCategory('Playback');
+    var audio = new Sound('johncena.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }
+      console.log('duration in seconds: ' + whoosh.getDuration());
+    });
+    audio.play((success) => {
+      if (success) {
+        console.log('playback successful');
+      } else {
+        console.log('playback failed');
+        whoosh.reset();
+      }
+    });
+    */
+    const soundObject = new Audio.Sound();
     try {
-      SoundPlayer.playSoundFile('johncena', 'mp3');
-    } catch (e) {
-      console.log(`cannot play the sound file`, e);
+      await soundObject.loadAsync(require('./johncena.mp3'));
+      await soundObject.playAsync();
+      console.log('playback successful');
+    } catch (error) {
+      console.log('playback failed');
     }
   };
 
