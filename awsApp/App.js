@@ -1,8 +1,14 @@
 import React from 'react';
+import { YellowBox } from 'react-native';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { Audio, ImagePicker, Constants, Camera, Permissions } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
+
+YellowBox.ignoreWarnings([
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+]);
 
 const options = {
   keyPrefix: "uploads/",
@@ -12,8 +18,6 @@ const options = {
   secretKey: creds.secretKey,
   successActionStatus: 201
 }
-
-console.log(creds.bucket);
 
 export default class App extends React.Component {
   state = {
@@ -141,7 +145,7 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.pngTranslated.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
