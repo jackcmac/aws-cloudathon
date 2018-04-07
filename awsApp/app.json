@@ -1,5 +1,16 @@
 {
   "expo": {
-    "sdkVersion": "26.0.0"
+    "sdkVersion": "26.0.0",
+    "android": {
+      "package": "awsApp"
+    },
+    "name": "awsApp",
+    "slug": "awsapp",
+    "version": "0.1.0",
+    "isDetached": true,
+    "detach": {
+      "scheme": "exp477affd032954142aee7c451ca0073c7",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.4.0-sdk26.0.0-e63d9209-070c-4118-b06b-c60e82da0b66.tar.gz"
+    }
   }
 }
