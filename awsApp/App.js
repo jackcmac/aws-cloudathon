@@ -168,7 +168,7 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png' + ((this.state.translate) ? 'Translatedb' : '') + '.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png' + ((this.state.translate) ? 'Translated' : '') + '.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
