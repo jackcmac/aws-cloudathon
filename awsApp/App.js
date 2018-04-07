@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { Audio, ImagePicker } from 'expo';
-import { ImagePicker } from 'expo';
-//import SoundPlayer from 'react-native-sound-player';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
 
@@ -32,6 +30,10 @@ export default class App extends React.Component {
         />
         {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <Button
+          title="Click to play sound"
+          onPress={this._playSound}
+          />
 
       </View>
     );
@@ -73,12 +75,10 @@ export default class App extends React.Component {
     
   };
 
-  
-
   _playSound = async () => {
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync(require('./johncena.mp3'));
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/output.mp3'});
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
