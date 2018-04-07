@@ -1,0 +1,9 @@
+Name: Team BPA
+Date: 4/7/18
+Members:
+	- Brandon Posey - bposey@g.clemson.edu
+	- Jack McElhinney - jcmcelh@g.clemson.edu
+	- Jack Carroll - jcarro5@g.clemson.edu
+	- Noah Wright - nwwrigh@g.clemson.edu
+Title: Thinking Reader
+Overview: Our product was created to provide assistance to blind people. It functions by capturing an image and reading aloud any text or narrating objects through the image with the assistance of the AWS Rekognition Service and Lambda. 
