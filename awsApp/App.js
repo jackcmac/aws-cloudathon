@@ -69,7 +69,7 @@ export default class App extends React.Component {
       console.log(photo);
       let data = {
         uri: photo.uri,
-        name: "image" + state.id + ".png",
+        name: "image" + 2 + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
@@ -94,7 +94,7 @@ export default class App extends React.Component {
     if (!result.cancelled) {
       let data = {
         uri: result.uri,
-        name: state.id + ".png",
+        name: "image" + this.state.id + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
@@ -126,11 +126,11 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/' + state.id + '.png.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
-      console.log('playback failed');
+      console.log('playback failed', error);
     }
 
   };
