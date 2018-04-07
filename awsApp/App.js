@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { Audio, ImagePicker } from 'expo';
-import { ImagePicker } from 'expo';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { Audio, ImagePicker, Camera, Permissions } from 'expo';
 //import SoundPlayer from 'react-native-sound-player';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
@@ -70,10 +69,10 @@ export default class App extends React.Component {
     }
     console.log("dink");
 
-    
+
   };
 
-  
+
 
   _playSound = async () => {
     const soundObject = new Audio.Sound();
