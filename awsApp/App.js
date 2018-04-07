@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { Audio, ImagePicker, Camera, Permissions } from 'expo';
+import { Audio, ImagePicker, Constants, Camera, Permissions } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
 
@@ -17,6 +17,7 @@ console.log(creds.bucket);
 
 export default class App extends React.Component {
   state = {
+    id: Constants.deviceId,
     image: null,
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
@@ -68,7 +69,7 @@ export default class App extends React.Component {
       console.log(photo);
       let data = {
         uri: photo.uri,
-        name: "image2.png",
+        name: "image" + state.id + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
@@ -93,7 +94,7 @@ export default class App extends React.Component {
     if (!result.cancelled) {
       let data = {
         uri: result.uri,
-        name: "image1.png",
+        name: state.id + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
@@ -125,7 +126,7 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image2.png.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/' + state.id + '.png.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
