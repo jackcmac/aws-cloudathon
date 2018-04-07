@@ -6,8 +6,8 @@ Creating an app with react native that will recognize people from images of them
 
 * **Jack Mcelhinney** - [jackcmac](https://github.com/jackcmac)
 * **Jack Carroll** - [jpcarroll](https://github.com/jpcarroll)
-* **Joe Bost** - [ddawn1](https://github.com/DDawn1)
-* **Noah Wright** - [](https://github.com/)
+* **RIP Joe Bost** - [ddawn1](https://github.com/DDawn1)
+* **Noah Wright** - [noahww](https://github.com/noahww)
 
 ## License
 
