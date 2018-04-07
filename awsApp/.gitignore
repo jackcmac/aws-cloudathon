@@ -6,6 +6,9 @@
 # dependencies
 /node_modules
 
+# credentials
+/credentials
+
 # misc
 .env.local
 .env.development.local

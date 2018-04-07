@@ -2,6 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { ImagePicker } from 'expo';
 import SoundPlayer from 'react-native-sound-player';
+import { RNS3 } from 'react-native-aws3';
+
+const options = {
+  keyPrefix: "uploads/",
+  bucket: "your-bucket",
+  region: "us-east-1",
+  accessKey: "your-access-key",
+  secretKey: "your-secret-key",
+  successActionStatus: 201
+}
 
 export default class App extends React.Component {
   state = {
