@@ -1,0 +1,9 @@
+Name: Team BPA
+Date: 4/7/18
+Members:
+	- Brandon Posey
+	- Jack McElhinney
+	- Jack Carroll
+	- Noah Wright
+Title: Thinking Reader
+Overview: Our product was created to provide assistance to blind people. It functions by capturing an image and reading aloud any text or narrating objects through the image with the assistance of the AWS Rekognition Service and Lambda. 
