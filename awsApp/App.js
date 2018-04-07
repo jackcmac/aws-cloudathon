@@ -18,10 +18,17 @@ console.log(creds.bucket);
 export default class App extends React.Component {
   state = {
     image: null,
+    hasCameraPermission: null,
+    type: Camera.Constants.Type.back,
   };
 
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
   render() {
-    let { image } = this.state;
+    /*let { image } = this.state;
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -36,7 +43,43 @@ export default class App extends React.Component {
         />
 
       </View>
-    );
+    );*/
+    const { hasCameraPermission } = this.state;
+    if (hasCameraPermission === null) {
+      return <View />;
+    } else if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    } else {
+      return (
+        <View style={{ flex: 1 }} onPress={this.snap}>
+          <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+            <TouchableOpacity onPress={this.snap} style={{ flex: 1 }}>
+            </TouchableOpacity>
+          </Camera>
+        </View>
+      );
+    }
+
+  }
+
+  snap = async () => {
+    if (this.camera) {
+      let photo = await this.camera.takePictureAsync();
+      console.log(photo);
+      let data = {
+        uri: photo.uri,
+        name: "image2.png",
+        type: "image/png"
+      }
+      RNS3.put(data, options).then(response => {
+        if (response.status !== 201)
+          throw new Error("Failed to upload image to S3");
+        console.log(response.body);
+        setTimeout(() => {
+          this._playSound();
+        }, 5000);
+      });
+    }
   }
 
   _pickImage = async () => {
@@ -57,6 +100,9 @@ export default class App extends React.Component {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
         console.log(response.body);
+        this.setTimeout(() => {
+          this._playSound;
+        }, 1000);
         /**
          * {
          *   postResponse: {
@@ -68,7 +114,7 @@ export default class App extends React.Component {
          * }
          */
       });
-      this.setState({ image: result.uri });
+      //this.setState({ image: result.uri });
     }
     console.log("dink");
 
@@ -76,9 +122,10 @@ export default class App extends React.Component {
   };
 
   _playSound = async () => {
+    console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/output.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image2.png.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
