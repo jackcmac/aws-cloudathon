@@ -3,6 +3,9 @@
 # expo
 .expo/
 
+#credentials
+/credentials
+
 # dependencies
 /node_modules
 
