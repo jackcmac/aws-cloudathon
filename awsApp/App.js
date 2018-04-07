@@ -74,6 +74,12 @@ export default class App extends React.Component {
 
   snap = async () => {
     if (this.camera) {
+
+      const shutterSound = new Audio.Sound();
+      await shutterSound.loadAsync(require('./shutter.mp3'));
+      await shutterSound.playAsync();
+
+
       let photo = await this.camera.takePictureAsync();
       console.log(photo);
       let data = {
