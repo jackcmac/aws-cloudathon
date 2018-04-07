@@ -5,5 +5,5 @@ Members:
 	- Jack McElhinney - jcmcelh@g.clemson.edu
 	- Jack Carroll - jcarro5@g.clemson.edu
 	- Noah Wright - nwwrigh@g.clemson.edu
-Title: Thinking Reader
+Title: Show & Tell
 Overview: Our product was created to provide assistance to blind people. It functions by capturing an image and reading aloud any text or narrating objects through the image with the assistance of the AWS Rekognition Service and Lambda. 
