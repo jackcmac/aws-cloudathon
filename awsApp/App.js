@@ -1,6 +1,6 @@
 import React from 'react';
 import { YellowBox } from 'react-native';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Switch } from 'react-native';
 import { Audio, ImagePicker, Constants, Camera, Permissions } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
@@ -25,6 +25,7 @@ export default class App extends React.Component {
     image: null,
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    translate: false
   };
 
   async componentWillMount() {
@@ -66,18 +67,31 @@ export default class App extends React.Component {
             </TouchableOpacity>
 
           </View>
-          <Camera style={{ flex: 9 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+          <Camera style={{ flex: 8 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <TouchableOpacity onPress={this.snap} style={{ flex: 1 }}>
-              <Text 
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Tap to Analyze{' '}
+              <Text
+                style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                {' '}Tap to Analyze{' '}
               </Text>
             </TouchableOpacity>
           </Camera>
-        </View>
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{ fontSize: 18, marginBottom: 10, color: 'black' }}>
+              {' '}Translate to Spanish?{' '}
+            </Text>
+            <Switch onValueChange={this.changeTranslate}
+              value={this.state.translate}>
+            </Switch>
+          </View >
+        </View >
       );
     }
 
+  }
+
+  changeTranslate = (value) => {
+    this.setState({ translate: value })
   }
 
   snap = async () => {
@@ -149,7 +163,7 @@ export default class App extends React.Component {
     console.log("playing");
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png.mp3' });
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/image' + this.state.id + '.png' + ((this.state.translate) ? 'Translate' : '') + '.mp3' });
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
