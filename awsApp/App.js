@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { Audio, ImagePicker } from 'expo';
+import { Audio, ImagePicker, Constants } from 'expo';
 import { RNS3 } from 'react-native-aws3';
 import creds from "./credentials/awsConfig.json";
 
@@ -17,6 +17,7 @@ console.log(creds.bucket);
 
 export default class App extends React.Component {
   state = {
+    id: Constants.deviceId,
     image: null,
   };
 
@@ -50,7 +51,7 @@ export default class App extends React.Component {
     if (!result.cancelled) {
       let data = {
         uri: result.uri,
-        name: "image1.png",
+        name: state.id + ".png",
         type: "image/png"
       }
       RNS3.put(data, options).then(response => {
@@ -78,7 +79,7 @@ export default class App extends React.Component {
   _playSound = async () => {
     const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/output.mp3'});
+      await soundObject.loadAsync({ uri: 'https://s3.amazonaws.com/rekognitionapptest/' + state.id + '.png.mp3'});
       await soundObject.playAsync();
       console.log('playback successful');
     } catch (error) {
