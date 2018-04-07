@@ -68,6 +68,10 @@ export default class App extends React.Component {
           </View>
           <Camera style={{ flex: 9 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <TouchableOpacity onPress={this.snap} style={{ flex: 1 }}>
+              <Text 
+                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                  {' '}Tap to Analyze{' '}
+              </Text>
             </TouchableOpacity>
           </Camera>
         </View>
